@@ -11,6 +11,9 @@ print("4-texto")
 print("--------------------------")
 escolha = input("Qual a sua escolha: ")
 
+#auhybdaubdwaj
+print(escolha)
+
 match escolha:
     case "1":
         while True:
