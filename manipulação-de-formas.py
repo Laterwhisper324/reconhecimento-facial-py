@@ -11,10 +11,12 @@ print("4-texto")
 print("--------------------------")
 escolha = input("Qual a sua escolha: ")
 
+#auhybdaubdwaj
+print(escolha)
+
 match escolha:
     case "1":
         while True:
-            cap = cv2.VideoCapture(0)
             ret, frame = cap.read()
             width = int(cap.get(3))
             height = int(cap.get(4))
