@@ -1,9 +1,12 @@
 import cv2
 import camera
 import numpy as np
+import camera
 
-img = cv2.imread("mesa.jpg", 0)
-template = cv2.imread("cadeira2.png", 0)
+camera.recorte();
+
+img = cv2.imread("frame.jpg", 0)
+template = cv2.imread("template.png", 0)
 
 img2 = img.copy()
 
@@ -24,8 +27,8 @@ for method in methods:
 
 bottom_right = (location[0] + w, location[1] + h)
 
-cv2.rectangle(img2, location, bottom_right, [0, 255, 255], 1)
+cv2.rectangle(img2, location, bottom_right, [255, 0, 0], 1)
 
-cv2.imshow("img2", img2)
+cv2.imshow("reconhecimento", img2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
