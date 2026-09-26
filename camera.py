@@ -26,12 +26,14 @@
     #desenha o retangulo
 
     img = cv2.rectangle(frame, (x1, y1), (x2, y2), (128, 128, 128), 1)
+
     #recorta ele com base nos valores do tamanho do retangulo
 
     crop = frame[y1:y2 , x1:x2]
 
     cv2.imwrite("frame.jpg", frame)
     cv2.imwrite("template.png", crop)
+
     cv2.imshow("Frame", crop)
     cv2.imshow("img", img)
     cv2.waitKey(0)

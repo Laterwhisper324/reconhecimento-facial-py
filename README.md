@@ -4,7 +4,7 @@ Pequenos experimentos em Python com OpenCV. O projeto reúne exemplos de captura
 
 ## Versão atual
 
-O repositório não define número de versão nem possui tags de release. O estado registrado no Git é a branch `teste`, commit `002e88d` (`remoção de arquivo`). Portanto, esta é uma versão experimental, sem release numerada.
+O repositório não define número de versão nem possui tags de release. O estado registrado no Git é a branch `reconhecimentoDeFrames.py`, commit `002e88d` (`remoção de arquivo`). Portanto, esta é uma versão experimental, sem release numerada.
 
 ## Arquivos de código
 
@@ -23,13 +23,13 @@ As imagens usadas pelo exemplo de comparação estão na pasta `reconhecimento d
 
 ```powershell
 python -m pip install opencv-python numpy
-python reconhecimento-de-cores.py
+python reconcilement-de-cores.py
 ```
 
-Para executar outro exemplo, substitua o nome do script. Para `teste.py`, entre primeiro na pasta de imagens:
+Para executar outro exemplo, substitua o nome do script. Para `reconhecimentoDeFrames.py`, entre primeiro na pasta de imagens:
 
 ```powershell
-Set-Location "reconhecimento de objetos"
+Set-Location "reconcilement de objetos"
 python teste.py
 ```
 
