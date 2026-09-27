@@ -1,40 +1,45 @@
 # Projeto de visão computacional
 
-Pequenos experimentos em Python com OpenCV. O projeto reúne exemplos de captura de webcam, manipulação de imagem e detecção simples por cor e por comparação de modelos.
+Coleção de experimentos independentes em Python com OpenCV, MediaPipe e Pygame. Os exemplos usam webcam e imagens locais para testar captura, desenho, detecção por cor, comparação de imagens e rastreamento de mãos.
 
-## Versão atual
+## Rastreamento de mãos
 
-O repositório não define número de versão nem possui tags de release. O estado registrado no Git é a branch `reconhecimentoDeFrames.py`, commit `002e88d` (`remoção de arquivo`). Portanto, esta é uma versão experimental, sem release numerada.
+O script `reconhecimento de objetos/reconhecimentoDeMãos.py` usa o MediaPipe Tasks (`HandLandmarker`) para rastrear até duas mãos pela webcam. Ele:
 
-## Arquivos de código
+- espelha a imagem da webcam e desenha os 21 pontos e as conexões de cada mão;
+- mostra se o indicador está levantado e em qual lado da linha vertical central está a mão;
+- reconhece o gesto em que o dedo médio está levantado enquanto indicador, anelar e mínimo estão abaixados;
+- ao detectar o início desse gesto, toca `fart.mp3` e sorteia uma imagem entre `middle_finger_dog.jpg`, `cat_middle_finger.jpg`, `skull_middle_finger.jpg` e `horse_middle_finger.jpg`;
+- mostra a imagem sorteada ao lado do vídeo enquanto o gesto continuar. Para sortear e tocar novamente, abaixe o dedo médio e levante-o outra vez.
 
-- `camera.py` — inicia uma captura da câmera e exibe os quadros. A função `capture()` está incompleta: não libera a câmera nem fecha a janela ao sair.
-- `4-cameras-test.py` — captura uma webcam e monta uma visualização em quatro quadrantes: imagem convertida para LAB, imagem original e uma cópia girada em 180 graus. Apesar do nome, usa apenas uma câmera.
-- `controles-de-imagens.py` — abre e mostra uma imagem de exemplo (`reconhecimento de objetos/ottq2x812v7b1.jpg`).
-- `manipulação-de-formas.py` — permite escolher na webcam entre desenhar linhas, retângulo, círculo ou texto.
+A detecção dos dedos usa comparações simples entre landmarks e funciona melhor com a mão aproximadamente ereta e voltada para a câmera. O polegar não faz parte da verificação de dedos abaixados na implementação atual.
+
+Na primeira execução, o script baixa o arquivo `hand_landmarker.task` para a pasta `reconhecimento de objetos`; as próximas execuções reutilizam esse modelo local. É necessária conexão com a internet apenas para esse primeiro download.
+
+### Dependências e execução
+
+Instale as bibliotecas usadas pelo rastreador:
+
+```powershell
+python -m pip install mediapipe==1.0.1 opencv-python numpy pygame
+```
+
+Execute a partir da pasta que contém o áudio `fart.mp3`:
+
+```powershell
+Set-Location "reconhecimento de objetos"
+python reconhecimentoDeMãos.py
+```
+
+Pressione `q` na janela do vídeo para encerrar.
+
+## Outros exemplos
+
+- `camera.py` — captura e exibe quadros da webcam. A função `capture()` está incompleta e não libera a câmera nem fecha a janela ao sair; o arquivo também não chama a função diretamente.
+- `4-cameras-test.py` — cria uma visualização em quatro quadrantes usando uma webcam: conversão para LAB, imagem original e cópia girada em 180 graus. Apesar do nome, usa apenas uma câmera.
+- `controles-de-imagens.py` — abre e mostra uma imagem de exemplo em `reconhecimento de objetos/ottq2x812v7b1.jpg`.
+- `manipulação-de-formas.py` — permite desenhar formas e texto sobre a imagem da webcam.
 - `reconhecimento-de-cores.py` — converte o vídeo para HSV, cria máscaras para vermelho e azul e exibe as regiões detectadas.
-- `reconhecimento de objetos/teste.py` — compara `cadeira2.png` com `mesa.jpg` usando vários métodos de template matching do OpenCV e marca a localização encontrada.
+- `reconhecimento de objetos/reconhecimentoDeFrames.py` — compara um frame e um template usando métodos de template matching do OpenCV.
 
-As imagens usadas pelo exemplo de comparação estão na pasta `reconhecimento de objetos`. Execute esse script com essa pasta como diretório de trabalho para que os caminhos relativos (`mesa.jpg` e `cadeira2.png`) sejam encontrados.
-
-## Requisitos e execução
-
-É necessário Python com `opencv-python` e `numpy` instalados, além de uma webcam para os exemplos de vídeo.
-
-```powershell
-python -m pip install opencv-python numpy
-python reconcilement-de-cores.py
-```
-
-Para executar outro exemplo, substitua o nome do script. Para `reconhecimentoDeFrames.py`, entre primeiro na pasta de imagens:
-
-```powershell
-Set-Location "reconcilement de objetos"
-python teste.py
-```
-
-Nas janelas de webcam, pressione `q` para sair. O arquivo `dist/controles-de-imagens.exe` é um executável já presente no projeto; não há informação no repositório sobre como foi empacotado ou sobre sua versão.
-
-## Observações
-
-Os scripts são exemplos independentes, não uma aplicação integrada. Os scripts de webcam assumem que a câmera de índice `0` está disponível. `camera.py` não contém chamada direta à função `capture()`, então executá-lo isoladamente não inicia a captura. O script de comparação de objetos imprime/localiza apenas o resultado do último método percorrido.
+Os scripts são exemplos separados, não uma aplicação integrada. Os exemplos de webcam usam a câmera de índice `0`. O executável `dist/controles-de-imagens.exe` também está no repositório.
