@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("ottq2x812v7b1.jpg")
+img = cv2.imread("reconhecimento de objetos/ottq2x812v7b1.jpg")
 
 cv2.imshow("img", img)
 cv2.waitKey(0)
